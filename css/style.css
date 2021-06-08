@@ -1,0 +1,140 @@
+body {
+  background-color: #3a893a;
+  font-family: 'Press Start 2P', sans-serif;
+}
+
+.player {
+  width: 28px;
+  height: 32px;
+  background: url('../img/sprite.png');
+  background-position-y: -32px;
+  margin: 4px;
+}
+
+.left {
+  background-position-y: -32px;
+}
+
+.right {
+  background-position-y: -64px;
+}
+
+.down {
+  background-position-y: 0;
+}
+
+.up {
+  background-position-y: -96px;
+}
+
+#board {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.row {
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+.cell {
+  width: 40px;
+  height: 40px;
+}
+
+.green {
+  background: url('../img/zelda1.png');
+  background-position-x: -164px;
+  background-position-y: -109px;
+  background-size: 574px;
+}
+
+.trap {
+  background: url('../img/zelda1.png');
+  background-position-x: -77px;
+  background-position-y: -22px;
+  background-size: 35.5rem;
+}
+
+.treeYellow {
+  position: absolute;
+  top: 200px;
+  left: 200px;
+  width: 210px;
+  height: 250px;
+  background: url('../img/zelda1.png');
+  background-position-y: -330px;
+  background-position-x: -2px;
+  background-size: 600px;
+}
+
+.treeRed {
+  position: absolute;
+  top: 600px;
+  left: 200px;
+  width: 210px;
+  height: 250px;
+  background: url('../img/zelda1.png');
+  background-position-y: -330px;
+  background-position-x: -2px;
+  background-size: 600px;
+}
+
+.treeGreen {
+  position: absolute;
+  top: 200px;
+  left: 400px;
+  width: 210px;
+  height: 250px;
+  background: url('../img/zelda1.png');
+  background-position-y: -330px;
+  background-position-x: -2px;
+  background-size: 600px;
+}
+
+.buttonPlay {
+  padding: 1rem;
+}
+
+.buisson {
+  background: url('../img/zelda1.png');
+  background-position-x: -205px;
+  background-position-y: -65px;
+  background-size: 35.5rem;
+}
+
+.arrondi-top-left {
+  border-radius: 0.5rem 0 0 0;
+}
+
+.arrondi-bottom-left {
+  border-radius: 0 0 0 0.5rem;
+}
+
+.arrondi-top-right {
+  border-radius: 0 0.5rem 0 0;
+}
+
+.arrondi-bottom-right {
+  border-radius: 0 0 0.5rem 0;
+}
+
+.gameOver {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 25%;
+  transform: perspective(1px) translateY(-50%);
+  width: 50%;
+  text-align: center;
+  padding: 2rem;
+  background-color: #ccc;
+}
+
+.none {
+  display: none;
+}
