@@ -39,17 +39,12 @@ const app = {
     });
   },
   createTrap: () => {
-    app.traps = [
-      {
-      x: 0,
-      y: 0,
-      },
-    ];
-    app.traps[0].y = app.generateRandomNumber(1, app.targetCell.y-1);
-    app.traps[0].x = app.generateRandomNumber(1, app.targetCell.x-1);
-    app.traps.push({
-      x: app.generateRandomNumber(1, app.targetCell.x-1), y: app.generateRandomNumber(1, app.targetCell.y-1)
-    });
+    app.traps = [];
+    for(i = 0;i < 8;i++) {
+      app.traps.push({
+        x: app.generateRandomNumber(1, app.targetCell.x-1), y: app.generateRandomNumber(1, app.targetCell.y-1)
+      });
+    }
   },
   createTree: () => {
     for(i = 0; i < 4; i++) {
@@ -64,10 +59,18 @@ const app = {
     }
     for(i = 0; i < 4; i++) {
       const tree = document.createElement('div');
-      tree.classList.add('treeRed');
+      tree.classList.add('treeGreen');
       document.body.appendChild(tree);
     }
 
+  },
+  createFLower: () => {
+    app.flowers = [];
+    for(i = 0;i < 8;i++) {
+      app.flowers.push({
+        x: app.generateRandomNumber(1, app.targetCell.x-1), y: app.generateRandomNumber(1, app.targetCell.y-1)
+      });
+    }
   },
   generateRandomNumber: (min, max) => {
     var randSmall = Math.random();
@@ -217,6 +220,11 @@ const app = {
             cell.classList.add("trap");
           }
         })
+        app.flowers.forEach(element => {
+          if(j === element.x & i === element.y) {
+            cell.classList.add("flower");
+          }
+        })
         app.buissons.forEach(element => {
           if(j === element.x & i === element.y) {
             cell.classList.add("buisson");
@@ -262,6 +270,7 @@ const app = {
     app.createTrap();
     app.createTree();
     app.createBuissons();
+    app.createFLower();
     app.drawBoard();
   },
   init: () => {

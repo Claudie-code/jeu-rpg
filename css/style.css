@@ -57,7 +57,14 @@ body {
   background: url('../img/zelda1.png');
   background-position-x: -77px;
   background-position-y: -22px;
-  background-size: 35.5rem;
+  background-size: 574px;
+}
+
+.flower {
+  background: url('../img/zelda1.png');
+  background-position-x: -110px;
+  background-position-y: -3px;
+  background-size: 380px;
 }
 
 .treeYellow {
@@ -80,19 +87,19 @@ body {
   height: 250px;
   background: url('../img/zelda1.png');
   background-position-y: -330px;
-  background-position-x: -2px;
+  background-position-x: -195px;
   background-size: 600px;
 }
 
 .treeGreen {
   position: absolute;
-  top: 200px;
-  left: 400px;
+  top: 150px;
+  right: 200px;
   width: 210px;
   height: 250px;
   background: url('../img/zelda1.png');
   background-position-y: -330px;
-  background-position-x: -2px;
+  background-position-x: -400px;
   background-size: 600px;
 }
 
@@ -132,7 +139,8 @@ body {
   width: 50%;
   text-align: center;
   padding: 2rem;
-  background-color: #ccc;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: solid 1px black;
 }
 
 .none {
