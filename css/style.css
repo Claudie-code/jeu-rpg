@@ -62,9 +62,9 @@ body {
 
 .flower {
   background: url('../img/zelda1.png');
-  background-position-x: -110px;
-  background-position-y: -3px;
-  background-size: 380px;
+  background-position-x: -106px;
+  background-position-y: -1px;
+  background-size: 360px;
 }
 
 .treeYellow {

@@ -20,23 +20,23 @@ const app = {
     app.playOnclick();
   },
   createBuissons: () => {
-    app.buissons = [
-      {
-      x: 0,
-      y: 0,
-      },
-    ];
-    app.buissons[0].y = app.generateRandomNumber(1, app.targetCell.y-1);
-    app.buissons[0].x = app.generateRandomNumber(1, app.targetCell.x-1);
+    app.buissons = [];
+    for(i = 0;i < 2;i++) {
+    let buissonOrigin = 0;
     app.buissons.push({
-      x: app.buissons[0].x -1, y: app.buissons[0].y -1
+      x: app.generateRandomNumber(1, app.targetCell.x-1), y: app.generateRandomNumber(1, app.targetCell.y-1)
     });
     app.buissons.push({
-      x: app.buissons[0].x, y: app.buissons[0].y -1
+      x: app.buissons[buissonOrigin].x -1, y: app.buissons[buissonOrigin].y -1
     });
     app.buissons.push({
-      x: app.buissons[0].x -1, y: app.buissons[0].y
+      x: app.buissons[buissonOrigin].x, y: app.buissons[buissonOrigin].y -1
     });
+    app.buissons.push({
+      x: app.buissons[buissonOrigin].x -1, y: app.buissons[buissonOrigin].y
+    });
+    buissonOrigin += 3;
+    }
   },
   createTrap: () => {
     app.traps = [];
@@ -263,8 +263,8 @@ const app = {
     app.player.y = 0;
     app.deplacements = 0;
     app.targetCell = {};
-    app.randomRow = app.generateRandomNumber(10,14);
-    app.randomCell = app.generateRandomNumber(12,15);
+    app.randomRow = app.generateRandomNumber(12,17);
+    app.randomCell = app.generateRandomNumber(12,17);
     app.targetCell.y = app.randomRow - 1;
     app.targetCell.x = app.randomCell - 1;
     app.createTrap();
