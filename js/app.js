@@ -21,8 +21,8 @@ const app = {
   },
   createBuissons: () => {
     app.buissons = [];
-    for(i = 0;i < 2;i++) {
     let buissonOrigin = 0;
+    for(i = 0;i < 4;i++) {
     app.buissons.push({
       x: app.generateRandomNumber(1, app.targetCell.x-1), y: app.generateRandomNumber(1, app.targetCell.y-1)
     });
@@ -35,7 +35,7 @@ const app = {
     app.buissons.push({
       x: app.buissons[buissonOrigin].x -1, y: app.buissons[buissonOrigin].y
     });
-    buissonOrigin += 3;
+    buissonOrigin += 4;
     }
   },
   createTrap: () => {
@@ -110,6 +110,12 @@ const app = {
           console.log("tu te prends un mur");
         } else if((app.player.y === app.buissons[3].y + 1) && ((app.player.x === app.buissons[3].x) || (app.player.x === app.buissons[0].x))) {
           console.log("tu te prends un buisson");
+        } else if((app.player.y === app.buissons[3+4].y + 1) && ((app.player.x === app.buissons[3+4].x) || (app.player.x === app.buissons[0+4].x))) {
+          console.log("tu te prends un buisson");
+        } else if((app.player.y === app.buissons[3+8].y + 1) && ((app.player.x === app.buissons[3+8].x) || (app.player.x === app.buissons[0+8].x))) {
+          console.log("tu te prends un buisson");
+        } else if((app.player.y === app.buissons[3+12].y + 1) && ((app.player.x === app.buissons[3+12].x) || (app.player.x === app.buissons[0+12].x))) {
+          console.log("tu te prends un buisson");
         } else {
           app.player.y -= 1;
         }
@@ -118,6 +124,12 @@ const app = {
         if(app.player.x === app.targetCell.x) {
           console.log("tu te prends un mur");
         } else if((app.player.x === app.buissons[3].x - 1) && ((app.player.y === app.buissons[3].y) || (app.player.y === app.buissons[1].y))) {
+          console.log("tu te prends un buisson");
+        } else if((app.player.x === app.buissons[3+4].x - 1) && ((app.player.y === app.buissons[3+4].y) || (app.player.y === app.buissons[1+4].y))) {
+          console.log("tu te prends un buisson");
+        } else if((app.player.x === app.buissons[3+8].x - 1) && ((app.player.y === app.buissons[3+8].y) || (app.player.y === app.buissons[1+8].y))) {
+          console.log("tu te prends un buisson");
+        } else if((app.player.x === app.buissons[3+12].x - 1) && ((app.player.y === app.buissons[3+12].y) || (app.player.y === app.buissons[1+12].y))) {
           console.log("tu te prends un buisson");
         } else {
           app.player.x += 1; 
@@ -128,6 +140,12 @@ const app = {
           console.log("tu te prends un mur");
         } else if((app.player.y === app.buissons[1].y - 1) && ((app.player.x === app.buissons[3].x) || (app.player.x === app.buissons[2].x))) {
           console.log("tu te prends un buisson");
+        } else if((app.player.y === app.buissons[1+4].y - 1) && ((app.player.x === app.buissons[3+4].x) || (app.player.x === app.buissons[2+4].x))) {
+          console.log("tu te prends un buisson");
+        } else if((app.player.y === app.buissons[1+8].y - 1) && ((app.player.x === app.buissons[3+8].x) || (app.player.x === app.buissons[2+8].x))) {
+          console.log("tu te prends un buisson");
+        } else if((app.player.y === app.buissons[1+12].y - 1) && ((app.player.x === app.buissons[3+12].x) || (app.player.x === app.buissons[2+12].x))) {
+          console.log("tu te prends un buisson");
         } else {
           app.player.y += 1;
         }
@@ -136,6 +154,12 @@ const app = {
         if(app.player.x === 0) {
           console.log("tu te prends un mur");
         } else if((app.player.x === app.buissons[2].x + 1) && ((app.player.y === app.buissons[0].y) || (app.player.y === app.buissons[2].y))) {
+          console.log("tu te prends un buisson");
+        } else if((app.player.x === app.buissons[2+4].x + 1) && ((app.player.y === app.buissons[0+4].y) || (app.player.y === app.buissons[2+4].y))) {
+          console.log("tu te prends un buisson");
+        } else if((app.player.x === app.buissons[2+8].x + 1) && ((app.player.y === app.buissons[0+8].y) || (app.player.y === app.buissons[2+8].y))) {
+          console.log("tu te prends un buisson");
+        } else if((app.player.x === app.buissons[2+12].x + 1) && ((app.player.y === app.buissons[0+12].y) || (app.player.y === app.buissons[2+12].y))) {
           console.log("tu te prends un buisson");
         } else {
           app.player.x -= 1;
@@ -213,21 +237,21 @@ const app = {
           cell.classList.add('arrondi-bottom-right');
         }
         if(j === app.targetCell.x & i === app.targetCell.y) {
-          cell.classList.add("green");
+          cell.className = "cell green";
         }
         app.traps.forEach(element => {
           if(j === element.x & i === element.y) {
-            cell.classList.add("trap");
+            cell.className = "cell trap";
           }
         })
         app.flowers.forEach(element => {
           if(j === element.x & i === element.y) {
-            cell.classList.add("flower");
+            cell.className = "cell flower";
           }
         })
         app.buissons.forEach(element => {
           if(j === element.x & i === element.y) {
-            cell.classList.add("buisson");
+            cell.className = "cell buisson";
           }
         });
         if(j === app.player.x & i === app.player.y) {
