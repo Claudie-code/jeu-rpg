@@ -15,7 +15,7 @@ const app = {
   buttonPlay: document.createElement('button'),
   createButton: () => {
     app.buttonPlay.className = 'buttonPlay';
-    app.buttonPlay.textContent = 'Play';
+    app.buttonPlay.textContent = 'Rejouer';
     app.divResult.appendChild(app.buttonPlay);
     app.playOnclick();
   },
@@ -47,22 +47,41 @@ const app = {
     }
   },
   createTree: () => {
-    for(i = 0; i < 4; i++) {
+    for(i = 0; i < 5; i++) {
       const tree = document.createElement('div');
       tree.classList.add('treeYellow');
       document.body.appendChild(tree);
     }
+    document.querySelectorAll( '.treeYellow' )[1].style.left = "70%";
+    document.querySelectorAll( '.treeYellow' )[1].style.top = "70%";
+    document.querySelectorAll( '.treeYellow' )[2].style.left = "67%";
+    document.querySelectorAll( '.treeYellow' )[2].style.top = "-2%";
+    document.querySelectorAll( '.treeYellow' )[3].style.left = "20%";
+    document.querySelectorAll( '.treeYellow' )[3].style.top = "75%";
+    document.querySelectorAll( '.treeYellow' )[4].style.left = "87%";
+    document.querySelectorAll( '.treeYellow' )[4].style.top = "23%";
     for(i = 0; i < 4; i++) {
       const tree = document.createElement('div');
       tree.classList.add('treeRed');
       document.body.appendChild(tree);
     }
+    document.querySelectorAll( '.treeRed' )[1].style.left = "80%";
+    document.querySelectorAll( '.treeRed' )[1].style.top = "60%";
+    document.querySelectorAll( '.treeRed' )[2].style.left = "70%";
+    document.querySelectorAll( '.treeRed' )[2].style.top = "25%";
+    document.querySelectorAll( '.treeRed' )[3].style.left = "26%";
+    document.querySelectorAll( '.treeRed' )[3].style.top = "1%";
     for(i = 0; i < 4; i++) {
       const tree = document.createElement('div');
       tree.classList.add('treeGreen');
       document.body.appendChild(tree);
     }
-
+    document.querySelectorAll( '.treeGreen' )[1].style.left = "10%";
+    document.querySelectorAll( '.treeGreen' )[1].style.top = "10%";
+    document.querySelectorAll( '.treeGreen' )[2].style.left = "79%";
+    document.querySelectorAll( '.treeGreen' )[2].style.top = "37%";
+    document.querySelectorAll( '.treeGreen' )[3].style.left = "18%";
+    document.querySelectorAll( '.treeGreen' )[3].style.top = "42%";
   },
   createFLower: () => {
     app.flowers = [];
@@ -287,8 +306,8 @@ const app = {
     app.player.y = 0;
     app.deplacements = 0;
     app.targetCell = {};
-    app.randomRow = app.generateRandomNumber(12,17);
-    app.randomCell = app.generateRandomNumber(12,17);
+    app.randomRow = app.generateRandomNumber(7,13);
+    app.randomCell = app.generateRandomNumber(17,17);
     app.targetCell.y = app.randomRow - 1;
     app.targetCell.x = app.randomCell - 1;
     app.createTrap();
