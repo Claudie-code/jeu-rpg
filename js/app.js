@@ -69,19 +69,21 @@ const app = {
     document.querySelectorAll( '.treeRed' )[1].style.top = "60%";
     document.querySelectorAll( '.treeRed' )[2].style.left = "70%";
     document.querySelectorAll( '.treeRed' )[2].style.top = "25%";
-    document.querySelectorAll( '.treeRed' )[3].style.left = "26%";
-    document.querySelectorAll( '.treeRed' )[3].style.top = "1%";
-    for(i = 0; i < 4; i++) {
+    document.querySelectorAll( '.treeRed' )[3].style.left = "23%";
+    document.querySelectorAll( '.treeRed' )[3].style.top = "0";
+    for(i = 0; i < 5; i++) {
       const tree = document.createElement('div');
       tree.classList.add('treeGreen');
       document.body.appendChild(tree);
     }
-    document.querySelectorAll( '.treeGreen' )[1].style.left = "10%";
+    document.querySelectorAll( '.treeGreen' )[1].style.left = "7%";
     document.querySelectorAll( '.treeGreen' )[1].style.top = "10%";
     document.querySelectorAll( '.treeGreen' )[2].style.left = "79%";
     document.querySelectorAll( '.treeGreen' )[2].style.top = "37%";
     document.querySelectorAll( '.treeGreen' )[3].style.left = "18%";
     document.querySelectorAll( '.treeGreen' )[3].style.top = "42%";
+    document.querySelectorAll( '.treeGreen' )[4].style.left = "5%";
+    document.querySelectorAll( '.treeGreen' )[4].style.top = "35%";
   },
   createFLower: () => {
     app.flowers = [];
