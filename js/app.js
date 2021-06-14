@@ -49,7 +49,7 @@ const app = {
   createTree: () => {
     for(i = 0; i < 5; i++) {
       const tree = document.createElement('div');
-      tree.classList.add('treeYellow');
+      tree.classList.add('tree','treeYellow');
       document.body.appendChild(tree);
     }
     document.querySelectorAll( '.treeYellow' )[1].style.left = "70%";
@@ -62,7 +62,7 @@ const app = {
     document.querySelectorAll( '.treeYellow' )[4].style.top = "23%";
     for(i = 0; i < 4; i++) {
       const tree = document.createElement('div');
-      tree.classList.add('treeRed');
+      tree.classList.add('tree', 'treeRed');
       document.body.appendChild(tree);
     }
     document.querySelectorAll( '.treeRed' )[1].style.left = "80%";
@@ -73,7 +73,7 @@ const app = {
     document.querySelectorAll( '.treeRed' )[3].style.top = "0";
     for(i = 0; i < 5; i++) {
       const tree = document.createElement('div');
-      tree.classList.add('treeGreen');
+      tree.classList.add('tree', 'treeGreen');
       document.body.appendChild(tree);
     }
     document.querySelectorAll( '.treeGreen' )[1].style.left = "7%";

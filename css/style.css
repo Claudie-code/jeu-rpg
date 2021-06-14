@@ -1,5 +1,6 @@
 body {
-  background-color: #3a893a;
+  background: rgb(58,137,58);
+  background: radial-gradient(circle, rgb(58,137,58) 0%, rgba(19,98,19,1) 100%);
   font-family: 'Press Start 2P', sans-serif;
 }
 
@@ -47,66 +48,55 @@ body {
 }
 
 .green {
-  background: url('../img/zelda1.png');
-  background-position-x: -164px;
+  background: url('../img/zelda2.png');
+  background-position-x: -163px;
   background-position-y: -109px;
   background-size: 574px;
 }
 
 .trap {
-  background: url('../img/zelda1.png');
-  background-position-x: -77px;
+  background: url('../img/zelda2.png');
+  background-position-x: -76px;
   background-position-y: -22px;
   background-size: 574px;
 }
 
 .flower {
-  background: url('../img/zelda1.png');
-  background-position-x: -106px;
+  background: url('../img/zelda2.png');
+  background-position-x: -105px;
   background-position-y: -1px;
   background-size: 360px;
 }
 
-.treeYellow {
-  position: absolute;
-  top: 19%;
-  left: 17%;
+.tree {
   width: 210px;
   height: 250px;
-  background: url('../img/zelda1.png');
+  z-index: -1;
+  position: absolute;
+  background: url('../img/zelda2.png');
+  background-size: 600px;
+}
+
+.treeYellow {
+  top: 19%;
+  left: 17%;
   background-position-y: -330px;
   background-position-x: -2px;
-  background-size: 600px;
-  border-radius: 50%;
-  z-index: -1;
 }
 
 .treeRed {
-  position: absolute;
   top: 60%;
   left: 10%;
-  width: 210px;
-  height: 250px;
-  background: url('../img/zelda1.png');
   background-position-y: -330px;
-  background-position-x: -195px;
-  background-size: 600px;
-  border-radius: 50%;
-  z-index: -1;
+  background-position-x: -200px;
 }
 
 .treeGreen {
-  position: absolute;
   top: 10%;
   right: 11%;
-  width: 190px;
-  height: 250px;
-  background: url('../img/zelda1.png');
   background-position-y: -330px;
   background-position-x: -400px;
-  background-size: 600px;
-  border-radius: 50%;
-  z-index: -1;
+
 }
 
 .buttonPlay {
@@ -122,8 +112,8 @@ body {
 }
 
 .buisson {
-  background: url('../img/zelda1.png');
-  background-position-x: -205px;
+  background: url('../img/zelda2.png');
+  background-position-x: -204px;
   background-position-y: -65px;
   background-size: 35.5rem;
 }
