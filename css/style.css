@@ -75,26 +75,25 @@ body {
   position: absolute;
   background: url('../img/zelda2.png');
   background-size: 600px;
+  background-position-y: -330px;
+
 }
 
 .treeYellow {
   top: 19%;
   left: 17%;
-  background-position-y: -330px;
   background-position-x: -2px;
 }
 
 .treeRed {
   top: 60%;
   left: 10%;
-  background-position-y: -330px;
   background-position-x: -200px;
 }
 
 .treeGreen {
   top: 10%;
   right: 11%;
-  background-position-y: -330px;
   background-position-x: -400px;
 
 }
@@ -102,6 +101,13 @@ body {
 .buttonPlay {
   padding: 1rem;
   border-radius: 15px;
+}
+
+.buttonPlayCenter {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, 50%);
 }
 
 .gameOver p {

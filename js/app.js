@@ -12,11 +12,17 @@ const app = {
   deplacements: 0,
   randomRow: 0,
   randomCell: 0,
-  buttonPlay: document.createElement('button'),
-  createButton: () => {
-    app.buttonPlay.className = 'buttonPlay';
-    app.buttonPlay.textContent = 'Rejouer';
-    app.divResult.appendChild(app.buttonPlay);
+  buttonReplay: document.createElement('button'),
+  createButton: (text, show) => {
+    app.buttonReplay.className = 'buttonPlay';
+    app.buttonReplay.textContent = text;
+    if (show) {
+      app.divResult.appendChild(app.buttonReplay);
+    } else {
+      document.body.appendChild(app.buttonReplay);
+      app.buttonReplay.classList.add('buttonPlayCenter');
+    }
+
     app.playOnclick();
   },
   createBuissons: () => {
@@ -107,7 +113,7 @@ const app = {
     app.result.textContent = text;
     document.body.insertBefore(app.divResult,app.board);
     app.divResult.appendChild(app.result);
-    app.createButton();
+    app.createButton('Rejouer', 1);
   },
   isFall: () => {
     app.traps.forEach(element => {
@@ -295,7 +301,7 @@ const app = {
     app.drawBoard();
   },
   playOnclick: () => {
-    app.buttonPlay.onclick = () => {
+    app.buttonReplay.onclick = () => {
       app.divResult.className = "none";
       app.setGame();
     };
@@ -316,6 +322,7 @@ const app = {
     app.createTree();
     app.createBuissons();
     app.createFLower();
+    app.createButton('Jouer');
     app.drawBoard();
   },
   init: () => {
