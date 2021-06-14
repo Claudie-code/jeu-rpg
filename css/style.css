@@ -157,3 +157,85 @@ body {
 .none {
   display: none;
 }
+
+/*https://codepen.io/Inderpreet23/pen/rLzbLk*/
+
+.bar {
+	position: absolute;
+	width: 50px;
+	height: 5px;
+	background: #fff;
+	transition: all 1s linear;
+	-webkit-animation-duration: 1s;
+	animation-duration: 1s;
+	-webkit-animation-fill-mode: both;
+	animation-fill-mode: both;
+	-webkit-animation-iteration-count: infinite;
+	animation-iteration-count: infinite;
+}
+
+.bar.delay {
+	animation-delay: 0.5s;
+	-webkit-animation-delay: 0.5s;
+}
+.barTop {
+	top: -5px;
+	left: -5px;
+}
+.barRight {
+	top: 18px;
+	right: -28px;
+	transform: rotate(90deg);
+}
+.barBottom {
+	bottom: -5px;
+	left: -5px;
+}
+.barLeft {
+	top: 18px;
+	left: -28px;
+	transform: rotate(90deg);
+}
+ @-webkit-keyframes h-move {
+ 0% {
+left: -5px;
+}
+100% {
+left: 200px;
+}
+}
+ @keyframes h-move {
+ 0% {
+left: -5px;
+}
+100% {
+left: 200px;
+}
+}
+.barTop, .barBottom {
+	-webkit-animation-name: h-move;
+	animation-name: h-move;
+}
+ @-webkit-keyframes v-move {
+0% {
+top: -5px;
+}
+100% {
+top:228px;
+}
+}
+ @keyframes v-move {
+ 0% {
+top: -5px;
+}
+100% {
+top:228px;
+}
+}
+.barRight, .barLeft {
+	-webkit-animation-name: v-move;
+	animation-name: v-move;
+}
+
+
+

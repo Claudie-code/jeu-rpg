@@ -286,6 +286,19 @@ const app = {
           divPlayer.className = "player";
           divPlayer.classList.add(app.player.direction);
           cell.appendChild(divPlayer);
+          divPlayer.classList.add('hit');
+          const span1 = document.createElement('span');
+          const span2 = document.createElement('span');
+          const span3 = document.createElement('span');
+          const span4 = document.createElement('span');
+          span1.className = "bar barTop";
+          span2.className = "bar barRight delay";
+          span3.className = "bar barBottom delay";
+          span4.className = "bar barLeft";
+          divPlayer.appendChild(span1);
+          divPlayer.appendChild(span2);
+          divPlayer.appendChild(span3);
+          divPlayer.appendChild(span4);
         }
       }
       app.board.appendChild(row);
