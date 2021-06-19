@@ -255,7 +255,18 @@ const app = {
           break;
         case "e":
           if(app.player.direction === "left") {
-            app.hitLeft();
+            if((app.player.x === app.buissons[2].x + 1) && ((app.player.y === app.buissons[0].y) || (app.player.y === app.buissons[2].y))) {
+              app.hitLeft();
+              delete 
+            } else if((app.player.x === app.buissons[2+4].x + 1) && ((app.player.y === app.buissons[0+4].y) || (app.player.y === app.buissons[2+4].y))) {
+              app.hitLeft();
+            } else if((app.player.x === app.buissons[2+8].x + 1) && ((app.player.y === app.buissons[0+8].y) || (app.player.y === app.buissons[2+8].y))) {
+              app.hitLeft();
+            } else if((app.player.x === app.buissons[2+12].x + 1) && ((app.player.y === app.buissons[0+12].y) || (app.player.y === app.buissons[2+12].y))) {
+              app.hitLeft();
+            } else {
+              app.hitLeft();            
+            }
           } else if (app.player.direction === "right") {
             app.hitRight();
           } else if (app.player.direction === "up") {

@@ -204,7 +204,7 @@ body {
 left: -10px;
 }
 100% {
-left: 50px;
+left: 40px;
 }
 }
  @keyframes h-move {
@@ -212,7 +212,7 @@ left: 50px;
 left: -10px;
 }
 100% {
-left: 50px;
+left: 40px;
 }
 }
 .barTop, .barBottom {
@@ -224,7 +224,7 @@ left: 50px;
 top: -10px;
 }
 100% {
-top:50px;
+top:40px;
 }
 }
  @keyframes v-move {
@@ -232,7 +232,7 @@ top:50px;
 top: -10px;
 }
 100% {
-top:50px;
+top:40px;
 }
 }
 .barRight, .barLeft {
