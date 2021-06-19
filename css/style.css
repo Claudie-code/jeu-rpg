@@ -160,24 +160,27 @@ body {
 
 /*https://codepen.io/Inderpreet23/pen/rLzbLk*/
 
+.hit {
+  position: relative;
+}
+
 .bar {
 	position: absolute;
-	width: 50px;
-	height: 5px;
-	background: #fff;
-	transition: all 1s linear;
-	-webkit-animation-duration: 1s;
-	animation-duration: 1s;
+	width: 30px;
+	height: 3px;
+  border-radius: 50%;
+	-webkit-animation-duration: 0.7s;
+	animation-duration: 0.7s;
 	-webkit-animation-fill-mode: both;
 	animation-fill-mode: both;
 	-webkit-animation-iteration-count: infinite;
 	animation-iteration-count: infinite;
 }
 
-.bar.delay {
-	animation-delay: 0.5s;
-	-webkit-animation-delay: 0.5s;
+.white {
+  background-color: #fff;
 }
+
 .barTop {
 	top: -5px;
 	left: -5px;
@@ -198,18 +201,18 @@ body {
 }
  @-webkit-keyframes h-move {
  0% {
-left: -5px;
+left: -10px;
 }
 100% {
-left: 200px;
+left: 50px;
 }
 }
  @keyframes h-move {
  0% {
-left: -5px;
+left: -10px;
 }
 100% {
-left: 200px;
+left: 50px;
 }
 }
 .barTop, .barBottom {
@@ -218,18 +221,18 @@ left: 200px;
 }
  @-webkit-keyframes v-move {
 0% {
-top: -5px;
+top: -10px;
 }
 100% {
-top:228px;
+top:50px;
 }
 }
  @keyframes v-move {
  0% {
-top: -5px;
+top: -10px;
 }
 100% {
-top:228px;
+top:50px;
 }
 }
 .barRight, .barLeft {

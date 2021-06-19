@@ -197,6 +197,22 @@ const app = {
     }
     app.redrawBoard();
   },
+  hitTop: () => {
+    app.span.className = "bar barTop white";
+    setTimeout(() => {app.span.classList.remove('white')}, 2000)
+  },
+  hitBottom: () => {
+    app.span.className = "bar barBottom white";
+    setTimeout(() => {app.span.classList.remove('white')}, 2000)
+  },
+  hitLeft: () => {
+    app.span.className = "bar barLeft white";
+    setTimeout(() => {app.span.classList.remove('white')}, 2000)
+  },
+  hitRight: () => {
+    app.span.className = "bar barRight white";
+    setTimeout(() => {app.span.classList.remove('white')}, 2000)
+  },
   listenKeyboardEvents: () => {
     document.addEventListener('keydown', (e) => {
       if (app.gameOver) {
@@ -235,6 +251,17 @@ const app = {
           } else {
             app.player.direction = 'left';
             app.redrawBoard();
+          }
+          break;
+        case "e":
+          if(app.player.direction === "left") {
+            app.hitLeft();
+          } else if (app.player.direction === "right") {
+            app.hitRight();
+          } else if (app.player.direction === "up") {
+            app.hitTop();
+          } else if (app.player.direction === "down") {
+            app.hitBottom();
           }
           break;
         default:
@@ -287,18 +314,8 @@ const app = {
           divPlayer.classList.add(app.player.direction);
           cell.appendChild(divPlayer);
           divPlayer.classList.add('hit');
-          const span1 = document.createElement('span');
-          const span2 = document.createElement('span');
-          const span3 = document.createElement('span');
-          const span4 = document.createElement('span');
-          span1.className = "bar barTop";
-          span2.className = "bar barRight delay";
-          span3.className = "bar barBottom delay";
-          span4.className = "bar barLeft";
-          divPlayer.appendChild(span1);
-          divPlayer.appendChild(span2);
-          divPlayer.appendChild(span3);
-          divPlayer.appendChild(span4);
+          app.span = document.createElement('span');
+          divPlayer.appendChild(app.span);
         }
       }
       app.board.appendChild(row);
