@@ -213,6 +213,14 @@ const app = {
     app.span.className = "bar barRight white";
     setTimeout(() => {app.span.classList.remove('white')}, 2000)
   },
+  findBuisson: () => {
+    const result = app.buissons.findIndex( element => {
+      return ((app.player.x == (element.x + 1)) && (app.player.y == element.y)) 
+      || ((app.player.x == (element.x + 1)) && (app.player.y == element.y));
+    });
+
+    return result
+  },
   listenKeyboardEvents: () => {
     document.addEventListener('keydown', (e) => {
       if (app.gameOver) {
@@ -255,14 +263,20 @@ const app = {
           break;
         case "e":
           if(app.player.direction === "left") {
-            if((app.player.x === app.buissons[2].x + 1) && ((app.player.y === app.buissons[0].y) || (app.player.y === app.buissons[2].y))) {
+            if(app.findBuisson()) {
               app.hitLeft();
-              delete 
-            } else if((app.player.x === app.buissons[2+4].x + 1) && ((app.player.y === app.buissons[0+4].y) || (app.player.y === app.buissons[2+4].y))) {
+              const result = app.buissons.findIndex( element => {
+                return (app.player.x == (element.x + 1)) && (app.player.y == element.y);
+              })
+              console.log(result)
+              delete app.buissons[result];
+              console.log(app.buissons)
+              app.redrawBoard();
+            } else if(app.findBuisson()) {
               app.hitLeft();
-            } else if((app.player.x === app.buissons[2+8].x + 1) && ((app.player.y === app.buissons[0+8].y) || (app.player.y === app.buissons[2+8].y))) {
+            } else if(app.findBuisson()) {
               app.hitLeft();
-            } else if((app.player.x === app.buissons[2+12].x + 1) && ((app.player.y === app.buissons[0+12].y) || (app.player.y === app.buissons[2+12].y))) {
+            } else if(app.findBuisson()) {
               app.hitLeft();
             } else {
               app.hitLeft();            
