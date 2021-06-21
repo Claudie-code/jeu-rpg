@@ -180,14 +180,8 @@ const app = {
       case 'left':
         if(app.player.x === 0) {
           console.log("tu te prends un mur");
-        } else if((app.player.x === app.buissons[2].x + 1) && ((app.player.y === app.buissons[0].y) || (app.player.y === app.buissons[2].y))) {
-          console.log("tu te prends un buisson");
-        } else if((app.player.x === app.buissons[2+4].x + 1) && ((app.player.y === app.buissons[0+4].y) || (app.player.y === app.buissons[2+4].y))) {
-          console.log("tu te prends un buisson");
-        } else if((app.player.x === app.buissons[2+8].x + 1) && ((app.player.y === app.buissons[0+8].y) || (app.player.y === app.buissons[2+8].y))) {
-          console.log("tu te prends un buisson");
-        } else if((app.player.x === app.buissons[2+12].x + 1) && ((app.player.y === app.buissons[0+12].y) || (app.player.y === app.buissons[2+12].y))) {
-          console.log("tu te prends un buisson");
+        } else if (app.findBuissonLeft() > 0) {
+          console.log("tu te prends un buisson", app.findBuissonLeft());
         } else {
           app.player.x -= 1;
         }
@@ -213,13 +207,20 @@ const app = {
     app.span.className = "bar barRight white";
     setTimeout(() => {app.span.classList.remove('white')}, 2000)
   },
-  findBuisson: () => {
-    const result = app.buissons.findIndex( element => {
-      return ((app.player.x == (element.x + 1)) && (app.player.y == element.y)) 
-      || ((app.player.x == (element.x + 1)) && (app.player.y == element.y));
+  findBuissonLeft: () => {
+    const buissonNoEmpty = app.buissons.filter(element => {
+      return element != null;
     });
-
-    return result
+    const result = buissonNoEmpty.findIndex( element => {
+      return ((app.player.x == (element.x + 1)) && (app.player.y == element.y));
+    });
+    return result;
+  },
+  findBuissonRight: () => {
+    const result = app.buissons.findIndex( element => {
+      return ((app.player.x == (element.x - 1)) && (app.player.y == element.y));
+    });
+    return result;
   },
   listenKeyboardEvents: () => {
     document.addEventListener('keydown', (e) => {
@@ -263,26 +264,19 @@ const app = {
           break;
         case "e":
           if(app.player.direction === "left") {
-            if(app.findBuisson()) {
+            if(app.findBuissonLeft()) {
               app.hitLeft();
-              const result = app.buissons.findIndex( element => {
-                return (app.player.x == (element.x + 1)) && (app.player.y == element.y);
-              })
-              console.log(result)
-              delete app.buissons[result];
+              delete app.buissons[app.findBuissonLeft()];
               console.log(app.buissons)
               app.redrawBoard();
-            } else if(app.findBuisson()) {
-              app.hitLeft();
-            } else if(app.findBuisson()) {
-              app.hitLeft();
-            } else if(app.findBuisson()) {
-              app.hitLeft();
-            } else {
-              app.hitLeft();            
             }
           } else if (app.player.direction === "right") {
-            app.hitRight();
+            if(app.findBuissonRight()) {
+              app.hitRight();
+              delete app.buissons[app.findBuissonRight()];
+              console.log(app.buissons)
+              app.redrawBoard();
+            }
           } else if (app.player.direction === "up") {
             app.hitTop();
           } else if (app.player.direction === "down") {
