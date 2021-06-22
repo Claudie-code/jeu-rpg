@@ -135,13 +135,7 @@ const app = {
       case 'up':
         if(app.player.y === 0) {
           console.log("tu te prends un mur");
-        } else if((app.player.y === app.buissons[3].y + 1) && ((app.player.x === app.buissons[3].x) || (app.player.x === app.buissons[0].x))) {
-          console.log("tu te prends un buisson");
-        } else if((app.player.y === app.buissons[3+4].y + 1) && ((app.player.x === app.buissons[3+4].x) || (app.player.x === app.buissons[0+4].x))) {
-          console.log("tu te prends un buisson");
-        } else if((app.player.y === app.buissons[3+8].y + 1) && ((app.player.x === app.buissons[3+8].x) || (app.player.x === app.buissons[0+8].x))) {
-          console.log("tu te prends un buisson");
-        } else if((app.player.y === app.buissons[3+12].y + 1) && ((app.player.x === app.buissons[3+12].x) || (app.player.x === app.buissons[0+12].x))) {
+        } else if(app.findBuissonTop() > 0) {
           console.log("tu te prends un buisson");
         } else {
           app.player.y -= 1;
@@ -150,13 +144,7 @@ const app = {
       case 'right':
         if(app.player.x === app.targetCell.x) {
           console.log("tu te prends un mur");
-        } else if((app.player.x === app.buissons[3].x - 1) && ((app.player.y === app.buissons[3].y) || (app.player.y === app.buissons[1].y))) {
-          console.log("tu te prends un buisson");
-        } else if((app.player.x === app.buissons[3+4].x - 1) && ((app.player.y === app.buissons[3+4].y) || (app.player.y === app.buissons[1+4].y))) {
-          console.log("tu te prends un buisson");
-        } else if((app.player.x === app.buissons[3+8].x - 1) && ((app.player.y === app.buissons[3+8].y) || (app.player.y === app.buissons[1+8].y))) {
-          console.log("tu te prends un buisson");
-        } else if((app.player.x === app.buissons[3+12].x - 1) && ((app.player.y === app.buissons[3+12].y) || (app.player.y === app.buissons[1+12].y))) {
+        } else if(app.findBuissonRight() > 0) {
           console.log("tu te prends un buisson");
         } else {
           app.player.x += 1; 
@@ -165,13 +153,7 @@ const app = {
       case 'down':
         if(app.player.y === app.targetCell.y) {
           console.log("tu te prends un mur");
-        } else if((app.player.y === app.buissons[1].y - 1) && ((app.player.x === app.buissons[3].x) || (app.player.x === app.buissons[2].x))) {
-          console.log("tu te prends un buisson");
-        } else if((app.player.y === app.buissons[1+4].y - 1) && ((app.player.x === app.buissons[3+4].x) || (app.player.x === app.buissons[2+4].x))) {
-          console.log("tu te prends un buisson");
-        } else if((app.player.y === app.buissons[1+8].y - 1) && ((app.player.x === app.buissons[3+8].x) || (app.player.x === app.buissons[2+8].x))) {
-          console.log("tu te prends un buisson");
-        } else if((app.player.y === app.buissons[1+12].y - 1) && ((app.player.x === app.buissons[3+12].x) || (app.player.x === app.buissons[2+12].x))) {
+        } else if(app.findBuissonBottom() > 0) {
           console.log("tu te prends un buisson");
         } else {
           app.player.y += 1;
@@ -191,36 +173,48 @@ const app = {
     }
     app.redrawBoard();
   },
-  hitTop: () => {
-    app.span.className = "bar barTop white";
-    setTimeout(() => {app.span.classList.remove('white')}, 2000)
-  },
-  hitBottom: () => {
-    app.span.className = "bar barBottom white";
-    setTimeout(() => {app.span.classList.remove('white')}, 2000)
-  },
-  hitLeft: () => {
-    app.span.className = "bar barLeft white";
-    setTimeout(() => {app.span.classList.remove('white')}, 2000)
-  },
-  hitRight: () => {
-    app.span.className = "bar barRight white";
-    setTimeout(() => {app.span.classList.remove('white')}, 2000)
+  hit: (direction) => {
+    console.log(direction)
+    app.span.classList.add =("bar", "barLeft", "white");
+    setTimeout(() => {app.span.classList.remove('white')}, 2000);
+    delete app.buissons[direction];
+    app.buissons = app.buissonNoEmpty();
+    console.log(app.buissons)
+    setTimeout(() => {app.redrawBoard()}, 2000);
   },
   findBuissonLeft: () => {
-    const buissonNoEmpty = app.buissons.filter(element => {
-      return element != null;
-    });
+    const buissonNoEmpty = app.buissonNoEmpty();
     const result = buissonNoEmpty.findIndex( element => {
-      return ((app.player.x == (element.x + 1)) && (app.player.y == element.y));
+      return (((app.player.x - 1) == element.x) && (app.player.y == element.y));
     });
     return result;
   },
   findBuissonRight: () => {
-    const result = app.buissons.findIndex( element => {
-      return ((app.player.x == (element.x - 1)) && (app.player.y == element.y));
+    const buissonNoEmpty = app.buissonNoEmpty();
+    const result = buissonNoEmpty.findIndex( element => {
+      return (((app.player.x + 1) == element.x) && (app.player.y == element.y));
     });
     return result;
+  },
+  findBuissonBottom: () => {
+    const buissonNoEmpty = app.buissonNoEmpty();
+    const result = buissonNoEmpty.findIndex( element => {
+      return ((app.player.x == element.x) && ((app.player.y + 1) == element.y));
+    });
+    return result;
+  },
+  findBuissonTop: () => {
+    const buissonNoEmpty = app.buissonNoEmpty();
+    const result = buissonNoEmpty.findIndex( element => {
+      return ((app.player.x == element.x) && ((app.player.y - 1) == element.y));
+    });
+    return result;
+  },
+  buissonNoEmpty:  () => { 
+    const buissonNoEmpty = app.buissons.filter(element => {
+      return element != null;
+    });
+    return buissonNoEmpty;
   },
   listenKeyboardEvents: () => {
     document.addEventListener('keydown', (e) => {
@@ -265,22 +259,20 @@ const app = {
         case "e":
           if(app.player.direction === "left") {
             if(app.findBuissonLeft()) {
-              app.hitLeft();
-              delete app.buissons[app.findBuissonLeft()];
-              console.log(app.buissons)
-              app.redrawBoard();
+              app.hit(app.findBuissonLeft());
             }
           } else if (app.player.direction === "right") {
             if(app.findBuissonRight()) {
-              app.hitRight();
-              delete app.buissons[app.findBuissonRight()];
-              console.log(app.buissons)
-              app.redrawBoard();
+              app.hit(app.findBuissonRight());
             }
           } else if (app.player.direction === "up") {
-            app.hitTop();
+            if(app.findBuissonTop()) {
+              app.hit(app.findBuissonTop());
+            }
           } else if (app.player.direction === "down") {
-            app.hitBottom();
+            if(app.findBuissonBottom()) {
+              app.hit(app.findBuissonBottom());
+            }
           }
           break;
         default:
