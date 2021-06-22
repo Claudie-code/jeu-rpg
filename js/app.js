@@ -163,7 +163,7 @@ const app = {
         if(app.player.x === 0) {
           console.log("tu te prends un mur");
         } else if (app.findBuissonLeft() > 0) {
-          console.log("tu te prends un buisson", app.findBuissonLeft());
+          console.log("tu te prends un buisson");
         } else {
           app.player.x -= 1;
         }
@@ -175,11 +175,13 @@ const app = {
   },
   hit: (classHit, directionBuisson) => {
     app.span.classList.add("bar", classHit, "white");
-    setTimeout(() => {app.span.classList.remove('white')}, 1500);
+    setTimeout(() => {app.span.classList.remove('white')}, 1000);
     delete app.buissons[directionBuisson];
     app.buissons = app.buissonNoEmpty();
-    console.log(app.buissons);
-    setTimeout(() => {app.redrawBoard()}, 1800);
+    setTimeout(() => {
+      app.redrawBoard();    
+    }, 1300);
+    console.log(app.buissons)
   },
   findBuissonLeft: () => {
     const buissonNoEmpty = app.buissonNoEmpty();
