@@ -173,14 +173,13 @@ const app = {
     }
     app.redrawBoard();
   },
-  hit: (direction) => {
-    console.log(direction)
-    app.span.classList.add =("bar", "barLeft", "white");
-    setTimeout(() => {app.span.classList.remove('white')}, 2000);
-    delete app.buissons[direction];
+  hit: (classHit, directionBuisson) => {
+    app.span.classList.add("bar", classHit, "white");
+    setTimeout(() => {app.span.classList.remove('white')}, 1500);
+    delete app.buissons[directionBuisson];
     app.buissons = app.buissonNoEmpty();
-    console.log(app.buissons)
-    setTimeout(() => {app.redrawBoard()}, 2000);
+    console.log(app.buissons);
+    setTimeout(() => {app.redrawBoard()}, 1800);
   },
   findBuissonLeft: () => {
     const buissonNoEmpty = app.buissonNoEmpty();
@@ -259,19 +258,19 @@ const app = {
         case "e":
           if(app.player.direction === "left") {
             if(app.findBuissonLeft()) {
-              app.hit(app.findBuissonLeft());
+              app.hit("barLeft", app.findBuissonLeft());
             }
           } else if (app.player.direction === "right") {
             if(app.findBuissonRight()) {
-              app.hit(app.findBuissonRight());
+              app.hit("barRight", app.findBuissonRight());
             }
           } else if (app.player.direction === "up") {
             if(app.findBuissonTop()) {
-              app.hit(app.findBuissonTop());
+              app.hit("barTop", app.findBuissonTop());
             }
           } else if (app.player.direction === "down") {
             if(app.findBuissonBottom()) {
-              app.hit(app.findBuissonBottom());
+              app.hit("barBottom", app.findBuissonBottom());
             }
           }
           break;
