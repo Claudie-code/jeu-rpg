@@ -135,7 +135,7 @@ const app = {
       case 'up':
         if(app.player.y === 0) {
           console.log("tu te prends un mur");
-        } else if(app.findBuissonTop() > 0) {
+        } else if(app.findBuissonTop() > -1) {
           console.log("tu te prends un buisson");
         } else {
           app.player.y -= 1;
@@ -144,7 +144,7 @@ const app = {
       case 'right':
         if(app.player.x === app.targetCell.x) {
           console.log("tu te prends un mur");
-        } else if(app.findBuissonRight() > 0) {
+        } else if(app.findBuissonRight() > -1) {
           console.log("tu te prends un buisson");
         } else {
           app.player.x += 1; 
@@ -153,7 +153,7 @@ const app = {
       case 'down':
         if(app.player.y === app.targetCell.y) {
           console.log("tu te prends un mur");
-        } else if(app.findBuissonBottom() > 0) {
+        } else if(app.findBuissonBottom() > -1) {
           console.log("tu te prends un buisson");
         } else {
           app.player.y += 1;
@@ -162,7 +162,7 @@ const app = {
       case 'left':
         if(app.player.x === 0) {
           console.log("tu te prends un mur");
-        } else if (app.findBuissonLeft() > 0) {
+        } else if (app.findBuissonLeft() > -1) {
           console.log("tu te prends un buisson");
         } else {
           app.player.x -= 1;
@@ -181,7 +181,6 @@ const app = {
     setTimeout(() => {
       app.redrawBoard();    
     }, 1300);
-    console.log(app.buissons)
   },
   findBuissonLeft: () => {
     const buissonNoEmpty = app.buissonNoEmpty();
@@ -258,8 +257,9 @@ const app = {
           }
           break;
         case "e":
+          console.log(app.buissons)
           if(app.player.direction === "left") {
-            if(app.findBuissonLeft()) {
+            if(app.findBuissonLeft() || ((app.player.x - 1) == app.buissons[0].x) && (app.player.y == app.buissons[0].y)) {
               app.hit("barLeft", app.findBuissonLeft());
             }
           } else if (app.player.direction === "right") {
