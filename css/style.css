@@ -224,5 +224,21 @@ top:40px;
 	animation-name: v-move;
 }
 
+.heart {
+  position: absolute;
+  top: 3rem;
+  right: 4rem;
+  z-index: 1;
+  display: flex;
+  gap: 1rem;
+}
+
+.heart-bg {
+  width: 3rem;
+  height: 3rem;
+  background-image: url("../img/heart.png");
+  background-size: cover;
+}
+
 
 

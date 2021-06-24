@@ -13,6 +13,19 @@ const app = {
   randomRow: 0,
   randomCell: 0,
   buttonReplay: document.createElement('button'),
+  createHeart: () => {
+    app.heart.className = 'heart';
+    document.body.insertBefore(app.heart, app.board);
+    const div1 = document.createElement('div');
+    div1.className = 'heart-bg';
+    const div2 = document.createElement('div');
+    div2.className = 'heart-bg';
+    const div3 = document.createElement('div');
+    div3.className = 'heart-bg';
+    app.heart.appendChild(div1);
+    app.heart.appendChild(div2);
+    app.heart.appendChild(div3);
+  },
   createButton: (text, show) => {
     app.buttonReplay.className = 'buttonPlay';
     app.buttonReplay.textContent = text;
@@ -30,7 +43,7 @@ const app = {
     let buissonOrigin = 0;
     for(i = 0;i < 4;i++) {
     app.buissons.push({
-      x: app.generateRandomNumber(1, app.targetCell.x-1), y: app.generateRandomNumber(1, app.targetCell.y-1)
+      x: app.generateRandomNumber(2, app.targetCell.x-1), y: app.generateRandomNumber(2, app.targetCell.y-1)
     });
     app.buissons.push({
       x: app.buissons[buissonOrigin].x -1, y: app.buissons[buissonOrigin].y -1
@@ -339,6 +352,8 @@ const app = {
   setGame: () => {
     app.board = document.querySelector("#board");
     app.clearBoard();
+    app.heart = document.createElement('div')
+    app.createHeart()
     app.gameOver = false;
     app.player.x = 0;
     app.player.y = 0;
