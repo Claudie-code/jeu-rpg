@@ -124,22 +124,6 @@ body {
   background-size: 35.5rem;
 }
 
-.arrondi-top-left {
-  border-radius: 0.5rem 0 0 0;
-}
-
-.arrondi-bottom-left {
-  border-radius: 0 0 0 0.5rem;
-}
-
-.arrondi-top-right {
-  border-radius: 0 0.5rem 0 0;
-}
-
-.arrondi-bottom-right {
-  border-radius: 0 0 0.5rem 0;
-}
-
 .gameOver {
   display: block;
   position: absolute;

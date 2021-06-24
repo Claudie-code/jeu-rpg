@@ -117,7 +117,7 @@ const app = {
   },
   isFall: () => {
     app.traps.forEach(element => {
-      if(app.player.x === element.x && app.player.y === element.y) {
+      if((app.player.x === element.x && app.player.y === element.y)) {
         app.replay("Perdu!");
       }
     })
@@ -175,12 +175,12 @@ const app = {
   },
   hit: (classHit, directionBuisson) => {
     app.span.classList.add("bar", classHit, "white");
-    setTimeout(() => {app.span.classList.remove('white')}, 1000);
+    setTimeout(() => {app.span.classList.remove('white')}, 500);
     delete app.buissons[directionBuisson];
     app.buissons = app.buissonNoEmpty();
     setTimeout(() => {
       app.redrawBoard();    
-    }, 1300);
+    }, 700);
   },
   findBuissonLeft: () => {
     const buissonNoEmpty = app.buissonNoEmpty();
@@ -259,19 +259,19 @@ const app = {
         case "e":
           console.log(app.buissons)
           if(app.player.direction === "left") {
-            if(app.findBuissonLeft() || ((app.player.x - 1) == app.buissons[0].x) && (app.player.y == app.buissons[0].y)) {
+            if(app.findBuissonLeft() > -1) {
               app.hit("barLeft", app.findBuissonLeft());
             }
           } else if (app.player.direction === "right") {
-            if(app.findBuissonRight()) {
+            if(app.findBuissonRight() > -1) {
               app.hit("barRight", app.findBuissonRight());
             }
           } else if (app.player.direction === "up") {
-            if(app.findBuissonTop()) {
+            if(app.findBuissonTop() > -1) {
               app.hit("barTop", app.findBuissonTop());
             }
           } else if (app.player.direction === "down") {
-            if(app.findBuissonBottom()) {
+            if(app.findBuissonBottom() > -1) {
               app.hit("barBottom", app.findBuissonBottom());
             }
           }
@@ -290,18 +290,6 @@ const app = {
         const cell = document.createElement('div');
         cell.className = "cell";
         row.appendChild(cell);
-        if(j === 0 && i === 0) {
-          cell.classList.add('arrondi-top-left');
-        }
-        if(j === 0 && i === app.randomRow - 1) {
-          cell.classList.add('arrondi-bottom-left');
-        }
-        if(j === app.randomCell - 1 && i === 0) {
-          cell.classList.add('arrondi-top-right');
-        }
-        if(j === app.randomCell - 1 && i === app.randomRow - 1) {
-          cell.classList.add('arrondi-bottom-right');
-        }
         if(j === app.targetCell.x & i === app.targetCell.y) {
           cell.className = "cell green";
         }
