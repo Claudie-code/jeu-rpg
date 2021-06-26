@@ -13,6 +13,13 @@ const app = {
   randomRow: 0,
   randomCell: 0,
   buttonReplay: document.createElement('button'),
+  createMob: () => {
+    app.mob = [];
+    app.mob.push({
+      x: app.generateRandomNumber(5, app.targetCell.x-1), y: app.generateRandomNumber(1, app.targetCell.y-1)
+    });
+
+  },
   createHeart: () => {
     app.heart.className = 'heart';
     document.body.insertBefore(app.heart, app.board);
@@ -186,9 +193,11 @@ const app = {
     }
     app.redrawBoard();
   },
-  hit: (classHit, directionBuisson) => {
+  hit: (classHit) => {
     app.span.classList.add("bar", classHit, "white");
     setTimeout(() => {app.span.classList.remove('white')}, 500);
+  },
+  deleteBuisson: (directionBuisson) => {
     delete app.buissons[directionBuisson];
     app.buissons = app.buissonNoEmpty();
     setTimeout(() => {
@@ -272,20 +281,24 @@ const app = {
         case "e":
           console.log(app.buissons)
           if(app.player.direction === "left") {
+            app.hit("barLeft");
             if(app.findBuissonLeft() > -1) {
-              app.hit("barLeft", app.findBuissonLeft());
+              app.deleteBuisson(app.findBuissonLeft());
             }
           } else if (app.player.direction === "right") {
+            app.hit("barRight");
             if(app.findBuissonRight() > -1) {
-              app.hit("barRight", app.findBuissonRight());
+              app.deleteBuisson(app.findBuissonRight());
             }
           } else if (app.player.direction === "up") {
+            app.hit("barTop");
             if(app.findBuissonTop() > -1) {
-              app.hit("barTop", app.findBuissonTop());
+              app.deleteBuisson(app.findBuissonTop());
             }
           } else if (app.player.direction === "down") {
+            app.hit("barBottom");
             if(app.findBuissonBottom() > -1) {
-              app.hit("barBottom", app.findBuissonBottom());
+              app.deleteBuisson(app.findBuissonBottom());
             }
           }
           break;
@@ -306,6 +319,11 @@ const app = {
         if(j === app.targetCell.x & i === app.targetCell.y) {
           cell.className = "cell green";
         }
+        app.mob.forEach(element => {
+          if(j === element.x & i === element.y) {
+            cell.className = "cell mob";
+          }
+        })
         app.traps.forEach(element => {
           if(j === element.x & i === element.y) {
             cell.className = "cell trap";
@@ -363,6 +381,7 @@ const app = {
     app.randomCell = app.generateRandomNumber(17,17);
     app.targetCell.y = app.randomRow - 1;
     app.targetCell.x = app.randomCell - 1;
+    app.createMob();
     app.createTrap();
     app.createTree();
     app.createBuissons();
