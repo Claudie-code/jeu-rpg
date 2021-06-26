@@ -18,6 +18,24 @@ const app = {
     app.mob.push({
       x: app.generateRandomNumber(5, app.targetCell.x-1), y: app.generateRandomNumber(1, app.targetCell.y-1)
     });
+    app.isDeleteMob = false;
+    while(app.isDeleteMob) {
+      setTimeout(() => {
+        if (app.generateRandomNumber(0, 1)) {
+          if (app.generateRandomNumber(0, 1)) {
+            app.mob[0].x = -1
+          } else {
+            app.mob[0].x = +1
+          }
+        } else {
+          if (app.generateRandomNumber(0, 1)) {
+            app.mob[0].y = -1
+          } else {
+            app.mob[0].y = +1
+          }
+        }
+      }, 3000);
+    }
 
   },
   createHeart: () => {
