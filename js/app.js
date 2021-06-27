@@ -24,31 +24,29 @@ const app = {
     app.isDeleteMob = false;
 
       setInterval(() => {
-        console.log(app.mob[0])
         if (Math.random() < 0.5) {
-          console.log(Math.random() < 0.5)
           if (Math.random() < 0.5) {
-            if (app.mob[0].x > 0) {
-              app.mob[0].x -= 1;
-            }
+            app.mob[0].direction = 'right';
+            app.moveForward(app.mob[0])
           } else {
-            if (app.mob[0].x < app.targetCell.x) {
-              app.mob[0].x += 1;
-            }
+            app.mob[0].direction = 'left';
+            app.moveForward(app.mob[0])
           }
         } else {
           if (Math.random() < 0.5) {
             if (app.mob[0].y > 0) {
-              app.mob[0].y -= 1;
+              app.mob[0].direction = 'up';
+              app.moveForward(app.mob[0])
             }
           } else {
             if (app.mob[0].y < app.targetCell.y) {
-              app.mob[0].y += 1;
+              app.mob[0].direction = 'down';
+              app.moveForward(app.mob[0])
             }
           }
         }
         app.redrawBoard();
-      }, 3000);
+      }, 1000);
 
 
   },
@@ -187,7 +185,7 @@ const app = {
       case 'up':
         if(mobOrPlayer.y === 0) {
           console.log("tu te prends un mur");
-        } else if(app.findBuissonTop(mobOrPlayer) > -1) {
+        } else if(app.findBuissonTop(mobOrPlayer.x, mobOrPlayer.y) > -1) {
           console.log("tu te prends un buisson");
         } else {
           mobOrPlayer.y -= 1;
@@ -196,7 +194,7 @@ const app = {
       case 'right':
         if(mobOrPlayer.x === app.targetCell.x) {
           console.log("tu te prends un mur");
-        } else if(app.findBuissonRight(mobOrPlayer) > -1) {
+        } else if(app.findBuissonRight(mobOrPlayer.x, mobOrPlayer.y) > -1) {
           console.log("tu te prends un buisson");
         } else {
           mobOrPlayer.x += 1; 
@@ -205,7 +203,7 @@ const app = {
       case 'down':
         if(mobOrPlayer.y === app.targetCell.y) {
           console.log("tu te prends un mur");
-        } else if(app.findBuissonBottom(mobOrPlayer) > -1) {
+        } else if(app.findBuissonBottom(mobOrPlayer.x, mobOrPlayer.y) > -1) {
           console.log("tu te prends un buisson");
         } else {
           mobOrPlayer.y += 1;
@@ -214,7 +212,7 @@ const app = {
       case 'left':
         if(mobOrPlayer.x === 0) {
           console.log("tu te prends un mur");
-        } else if (app.findBuissonLeft(mobOrPlayer) > -1) {
+        } else if (app.findBuissonLeft(mobOrPlayer.x, mobOrPlayer.y) > -1) {
           console.log("tu te prends un buisson");
         } else {
           mobOrPlayer.x -= 1;
@@ -236,31 +234,31 @@ const app = {
       app.redrawBoard();    
     }, 700);
   },
-  findBuissonLeft: (mobOrPlayer) => {
+  findBuissonLeft: (mobOrPlayerX, mobOrPlayerY) => {
     const buissonNoEmpty = app.buissonNoEmpty();
     const result = buissonNoEmpty.findIndex( element => {
-      return (((mobOrPlayer.x - 1) == element.x) && (mobOrPlayer.y == element.y));
+      return (((mobOrPlayerX - 1) == element.x) && (mobOrPlayerY == element.y));
     });
     return result;
   },
-  findBuissonRight: (mobOrPlayer) => {
+  findBuissonRight: (mobOrPlayerX, mobOrPlayerY) => {
     const buissonNoEmpty = app.buissonNoEmpty();
     const result = buissonNoEmpty.findIndex( element => {
-      return (((mobOrPlayer.x + 1) == element.x) && (mobOrPlayer.y == element.y));
+      return (((mobOrPlayerX + 1) == element.x) && (mobOrPlayerY == element.y));
     });
     return result;
   },
-  findBuissonBottom: (mobOrPlayer) => {
+  findBuissonBottom: (mobOrPlayerX, mobOrPlayerY) => {
     const buissonNoEmpty = app.buissonNoEmpty();
     const result = buissonNoEmpty.findIndex( element => {
-      return ((mobOrPlayer.x == element.x) && ((mobOrPlayer.y + 1) == element.y));
+      return ((mobOrPlayerX == element.x) && ((mobOrPlayerY + 1) == element.y));
     });
     return result;
   },
-  findBuissonTop: (mobOrPlayer) => {
+  findBuissonTop: (mobOrPlayerX, mobOrPlayerY) => {
     const buissonNoEmpty = app.buissonNoEmpty();
     const result = buissonNoEmpty.findIndex( element => {
-      return ((mobOrPlayer.x == element.x) && ((mobOrPlayer.y - 1) == element.y));
+      return ((mobOrPlayerX == element.x) && ((mobOrPlayerY - 1) == element.y));
     });
     return result;
   },
@@ -314,23 +312,23 @@ const app = {
           console.log(app.buissons)
           if(app.player.direction === "left") {
             app.hit("barLeft");
-            if(app.findBuissonLeft() > -1) {
-              app.deleteBuisson(app.findBuissonLeft());
+            if(app.findBuissonLeft(app.player.x, app.player.y) > -1) {
+              app.deleteBuisson(app.findBuissonLeft(app.player.x, app.player.y));
             }
           } else if (app.player.direction === "right") {
             app.hit("barRight");
-            if(app.findBuissonRight() > -1) {
-              app.deleteBuisson(app.findBuissonRight());
+            if(app.findBuissonRight(app.player.x, app.player.y) > -1) {
+              app.deleteBuisson(app.findBuissonRight(app.player.x, app.player.y));
             }
           } else if (app.player.direction === "up") {
             app.hit("barTop");
-            if(app.findBuissonTop() > -1) {
-              app.deleteBuisson(app.findBuissonTop());
+            if(app.findBuissonTop(app.player.x, app.player.y) > -1) {
+              app.deleteBuisson(app.findBuissonTop(app.player.x, app.player.y));
             }
           } else if (app.player.direction === "down") {
             app.hit("barBottom");
-            if(app.findBuissonBottom() > -1) {
-              app.deleteBuisson(app.findBuissonBottom());
+            if(app.findBuissonBottom(app.player.x, app.player.y) > -1) {
+              app.deleteBuisson(app.findBuissonBottom(app.player.x, app.player.y));
             }
           }
           break;
