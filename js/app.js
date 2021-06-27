@@ -18,24 +18,38 @@ const app = {
     app.mob.push({
       x: app.generateRandomNumber(5, app.targetCell.x-1), y: app.generateRandomNumber(1, app.targetCell.y-1)
     });
+    app.moveMob();
+  },
+  moveMob: () => {
     app.isDeleteMob = false;
-    while(app.isDeleteMob) {
-      setTimeout(() => {
-        if (app.generateRandomNumber(0, 1)) {
-          if (app.generateRandomNumber(0, 1)) {
-            app.mob[0].x = -1
+
+      setInterval(() => {
+        console.log(app.mob[0])
+        if (Math.random() < 0.5) {
+          console.log(Math.random() < 0.5)
+          if (Math.random() < 0.5) {
+            if (app.mob[0].x > 0) {
+              app.mob[0].x -= 1;
+            }
           } else {
-            app.mob[0].x = +1
+            if (app.mob[0].x < app.targetCell.x) {
+              app.mob[0].x += 1;
+            }
           }
         } else {
-          if (app.generateRandomNumber(0, 1)) {
-            app.mob[0].y = -1
+          if (Math.random() < 0.5) {
+            if (app.mob[0].y > 0) {
+              app.mob[0].y -= 1;
+            }
           } else {
-            app.mob[0].y = +1
+            if (app.mob[0].y < app.targetCell.y) {
+              app.mob[0].y += 1;
+            }
           }
         }
+        app.redrawBoard();
       }, 3000);
-    }
+
 
   },
   createHeart: () => {
@@ -165,45 +179,45 @@ const app = {
       app.replay("Gagné!");
     }
   },
-  moveForward: () => {
+  moveForward: (mobOrPlayer) => {
     if (app.gameOver) {
       return;
     }
-    switch (app.player.direction) {
+    switch (mobOrPlayer.direction) {
       case 'up':
-        if(app.player.y === 0) {
+        if(mobOrPlayer.y === 0) {
           console.log("tu te prends un mur");
-        } else if(app.findBuissonTop() > -1) {
+        } else if(app.findBuissonTop(mobOrPlayer) > -1) {
           console.log("tu te prends un buisson");
         } else {
-          app.player.y -= 1;
+          mobOrPlayer.y -= 1;
         }
         break;
       case 'right':
-        if(app.player.x === app.targetCell.x) {
+        if(mobOrPlayer.x === app.targetCell.x) {
           console.log("tu te prends un mur");
-        } else if(app.findBuissonRight() > -1) {
+        } else if(app.findBuissonRight(mobOrPlayer) > -1) {
           console.log("tu te prends un buisson");
         } else {
-          app.player.x += 1; 
+          mobOrPlayer.x += 1; 
         }
         break;
       case 'down':
-        if(app.player.y === app.targetCell.y) {
+        if(mobOrPlayer.y === app.targetCell.y) {
           console.log("tu te prends un mur");
-        } else if(app.findBuissonBottom() > -1) {
+        } else if(app.findBuissonBottom(mobOrPlayer) > -1) {
           console.log("tu te prends un buisson");
         } else {
-          app.player.y += 1;
+          mobOrPlayer.y += 1;
         }
         break;
       case 'left':
-        if(app.player.x === 0) {
+        if(mobOrPlayer.x === 0) {
           console.log("tu te prends un mur");
-        } else if (app.findBuissonLeft() > -1) {
+        } else if (app.findBuissonLeft(mobOrPlayer) > -1) {
           console.log("tu te prends un buisson");
         } else {
-          app.player.x -= 1;
+          mobOrPlayer.x -= 1;
         }
         break;
       default:
@@ -222,31 +236,31 @@ const app = {
       app.redrawBoard();    
     }, 700);
   },
-  findBuissonLeft: () => {
+  findBuissonLeft: (mobOrPlayer) => {
     const buissonNoEmpty = app.buissonNoEmpty();
     const result = buissonNoEmpty.findIndex( element => {
-      return (((app.player.x - 1) == element.x) && (app.player.y == element.y));
+      return (((mobOrPlayer.x - 1) == element.x) && (mobOrPlayer.y == element.y));
     });
     return result;
   },
-  findBuissonRight: () => {
+  findBuissonRight: (mobOrPlayer) => {
     const buissonNoEmpty = app.buissonNoEmpty();
     const result = buissonNoEmpty.findIndex( element => {
-      return (((app.player.x + 1) == element.x) && (app.player.y == element.y));
+      return (((mobOrPlayer.x + 1) == element.x) && (mobOrPlayer.y == element.y));
     });
     return result;
   },
-  findBuissonBottom: () => {
+  findBuissonBottom: (mobOrPlayer) => {
     const buissonNoEmpty = app.buissonNoEmpty();
     const result = buissonNoEmpty.findIndex( element => {
-      return ((app.player.x == element.x) && ((app.player.y + 1) == element.y));
+      return ((mobOrPlayer.x == element.x) && ((mobOrPlayer.y + 1) == element.y));
     });
     return result;
   },
-  findBuissonTop: () => {
+  findBuissonTop: (mobOrPlayer) => {
     const buissonNoEmpty = app.buissonNoEmpty();
     const result = buissonNoEmpty.findIndex( element => {
-      return ((app.player.x == element.x) && ((app.player.y - 1) == element.y));
+      return ((mobOrPlayer.x == element.x) && ((mobOrPlayer.y - 1) == element.y));
     });
     return result;
   },
@@ -266,7 +280,7 @@ const app = {
       switch (e.key) {
         case "ArrowDown":
           if(app.player.direction === "down") {
-            app.moveForward();
+            app.moveForward(app.player);
           } else {
             app.player.direction = 'down';
             app.redrawBoard();
@@ -274,7 +288,7 @@ const app = {
           break;
         case "ArrowRight":
           if(app.player.direction === "right") {
-            app.moveForward();
+            app.moveForward(app.player);
           } else {
             app.player.direction = 'right';
             app.redrawBoard();
@@ -282,7 +296,7 @@ const app = {
           break;
         case "ArrowUp":
           if(app.player.direction === "up") {
-            app.moveForward();
+            app.moveForward(app.player);
           } else {
             app.player.direction = 'up';
             app.redrawBoard();
@@ -290,7 +304,7 @@ const app = {
           break;
         case "ArrowLeft":
           if(app.player.direction === "left") {
-            app.moveForward();
+            app.moveForward(app.player);
           } else {
             app.player.direction = 'left';
             app.redrawBoard();
@@ -399,11 +413,11 @@ const app = {
     app.randomCell = app.generateRandomNumber(17,17);
     app.targetCell.y = app.randomRow - 1;
     app.targetCell.x = app.randomCell - 1;
-    app.createMob();
     app.createTrap();
     app.createTree();
     app.createBuissons();
     app.createFLower();
+    app.createMob();
     app.createButton('Jouer');
     app.drawBoard();
   },
