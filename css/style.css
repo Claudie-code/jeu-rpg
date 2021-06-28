@@ -241,9 +241,10 @@ top:40px;
 }
 
 .mob {
+  width: 40px;
+  height: 40px;
   background: url('../img/mob.png');
-  transform: scaleX(-1) scale(1.25);
-  background-position-x: -7px;
+  transform: scaleX(-1);
   background-position-y: -8px;
   background-size: 670px;
 }

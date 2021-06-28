@@ -24,8 +24,8 @@ const app = {
     app.isDeleteMob = false;
 
       setInterval(() => {
-        if (Math.random() < 0.5) {
-          if (Math.random() < 0.5) {
+        if (Math.random() < 0.7) {
+          if (Math.random() < 0.2) {
             app.mob[0].direction = 'right';
             app.moveForward(app.mob[0])
           } else {
@@ -351,7 +351,10 @@ const app = {
         }
         app.mob.forEach(element => {
           if(j === element.x & i === element.y) {
-            cell.className = "cell mob";
+            const divMob = document.createElement('div');
+            divMob.className = "mob";
+            divMob.classList.add(app.mob[0].direction);
+            cell.appendChild(divMob);
           }
         })
         app.traps.forEach(element => {
