@@ -45,7 +45,6 @@ const app = {
             }
           }
         }
-        app.redrawBoard();
       }, 1000);
 
 
@@ -62,6 +61,67 @@ const app = {
     app.heart.appendChild(div1);
     app.heart.appendChild(div2);
     app.heart.appendChild(div3);
+  },
+  createMoveButtons: () => {
+    const divMoveButtons = document.createElement('div');
+    const divUpButton = document.createElement('div');
+    const divDownButtons = document.createElement('div');
+    const arrowUp = document.createElement('i');
+    const arrowRight = document.createElement('i');
+    const arrowLeft = document.createElement('i');
+    const arrowDown = document.createElement('i');
+    divMoveButtons.className = 'buttonMove';
+    arrowUp.classList.add("arrow", "arrow-up");
+    arrowDown.classList.add("arrow", "arrow-down");
+    arrowRight.classList.add("arrow", "arrow-right");
+    arrowLeft.classList.add("arrow", "arrow-left");
+    const buttonUp = document.createElement('button');
+    const buttonDown = document.createElement('button');
+    const buttonRight = document.createElement('button');
+    const buttonLeft = document.createElement('button');
+    buttonDown.addEventListener('click', function() {
+      if(app.player.direction === "down") {
+        app.moveForward(app.player);
+      } else {
+        app.player.direction = 'down';
+        app.redrawBoard();
+      }
+    });
+    buttonUp.addEventListener('click', function() {
+      if(app.player.direction === "up") {
+        app.moveForward(app.player);
+      } else {
+        app.player.direction = 'up';
+        app.redrawBoard();
+      }
+    });
+    buttonRight.addEventListener('click', function() {
+      if(app.player.direction === "right") {
+        app.moveForward(app.player);
+      } else {
+        app.player.direction = 'right';
+        app.redrawBoard();
+      }
+    });
+    buttonLeft.addEventListener('click', function() {
+      if(app.player.direction === "left") {
+        app.moveForward(app.player);
+      } else {
+        app.player.direction = 'left';
+        app.redrawBoard();
+      }
+    });
+    buttonUp.appendChild(arrowUp);
+    buttonDown.appendChild(arrowDown);
+    buttonRight.appendChild(arrowRight);
+    buttonLeft.appendChild(arrowLeft);
+    divUpButton.appendChild(buttonUp);
+    divMoveButtons.appendChild(divUpButton);
+    divMoveButtons.appendChild(divDownButtons);
+    divDownButtons.appendChild(buttonLeft);
+    divDownButtons.appendChild(buttonDown);
+    divDownButtons.appendChild(buttonRight);
+    document.body.appendChild(divMoveButtons);
   },
   createButton: (text, show) => {
     app.buttonReplay.className = 'buttonPlay';
@@ -420,6 +480,7 @@ const app = {
     app.createFLower();
     app.createMob();
     app.createButton('Jouer');
+    app.createMoveButtons();
     app.drawBoard();
   },
   init: () => {
