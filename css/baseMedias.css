@@ -1,0 +1,9 @@
+@media screen and (max-width: 1600px) {
+    .txt-animation {
+      font-size: 25px;
+      margin: 10px 0;
+    }
+    .tree {
+        display: none;
+    }
+  }
