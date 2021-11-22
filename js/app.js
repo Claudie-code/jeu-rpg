@@ -66,11 +66,12 @@ const app = {
     const divMoveButtons = document.createElement('div');
     const divUpButton = document.createElement('div');
     const divDownButtons = document.createElement('div');
+    const divHitButton = document.createElement('div');
     const arrowUp = document.createElement('i');
     const arrowRight = document.createElement('i');
     const arrowLeft = document.createElement('i');
     const arrowDown = document.createElement('i');
-    divMoveButtons.className = 'buttonMove';
+    divMoveButtons.className = 'move-buttons';
     arrowUp.classList.add("arrow", "arrow-up");
     arrowDown.classList.add("arrow", "arrow-down");
     arrowRight.classList.add("arrow", "arrow-right");
@@ -79,6 +80,9 @@ const app = {
     const buttonDown = document.createElement('button');
     const buttonRight = document.createElement('button');
     const buttonLeft = document.createElement('button');
+    const buttonHit = document.createElement('button');
+    buttonHit.textContent = "Attaquer (E)";
+    buttonHit.style.backgroundColor = "orange";
     buttonDown.addEventListener('click', function() {
       if(app.player.direction === "down") {
         app.moveForward(app.player);
@@ -111,13 +115,18 @@ const app = {
         app.redrawBoard();
       }
     });
+    buttonHit.addEventListener('click', function() {
+      app.hitAction();
+    });
     buttonUp.appendChild(arrowUp);
     buttonDown.appendChild(arrowDown);
     buttonRight.appendChild(arrowRight);
     buttonLeft.appendChild(arrowLeft);
     divUpButton.appendChild(buttonUp);
+    divHitButton.appendChild(buttonHit);
     divMoveButtons.appendChild(divUpButton);
     divMoveButtons.appendChild(divDownButtons);
+    divMoveButtons.appendChild(divHitButton);
     divDownButtons.appendChild(buttonLeft);
     divDownButtons.appendChild(buttonDown);
     divDownButtons.appendChild(buttonRight);
@@ -283,7 +292,7 @@ const app = {
     }
     app.redrawBoard();
   },
-  hit: (classHit) => {
+  hitStyle: (classHit) => {
     app.span.classList.add("bar", classHit, "white");
     setTimeout(() => {app.span.classList.remove('white')}, 500);
   },
@@ -328,6 +337,29 @@ const app = {
     });
     return buissonNoEmpty;
   },
+  hitAction: () => {
+    if(app.player.direction === "left") {
+      app.hitStyle("barLeft");
+      if(app.findBuissonLeft(app.player.x, app.player.y) > -1) {
+        app.deleteBuisson(app.findBuissonLeft(app.player.x, app.player.y));
+      }
+    } else if (app.player.direction === "right") {
+      app.hitStyle("barRight");
+      if(app.findBuissonRight(app.player.x, app.player.y) > -1) {
+        app.deleteBuisson(app.findBuissonRight(app.player.x, app.player.y));
+      }
+    } else if (app.player.direction === "up") {
+      app.hitStyle("barTop");
+      if(app.findBuissonTop(app.player.x, app.player.y) > -1) {
+        app.deleteBuisson(app.findBuissonTop(app.player.x, app.player.y));
+      }
+    } else if (app.player.direction === "down") {
+      app.hitStyle("barBottom");
+      if(app.findBuissonBottom(app.player.x, app.player.y) > -1) {
+        app.deleteBuisson(app.findBuissonBottom(app.player.x, app.player.y));
+      }
+    }
+  },
   listenKeyboardEvents: () => {
     document.addEventListener('keydown', (e) => {
       if (app.gameOver) {
@@ -369,28 +401,7 @@ const app = {
           }
           break;
         case "e":
-          console.log(app.buissons)
-          if(app.player.direction === "left") {
-            app.hit("barLeft");
-            if(app.findBuissonLeft(app.player.x, app.player.y) > -1) {
-              app.deleteBuisson(app.findBuissonLeft(app.player.x, app.player.y));
-            }
-          } else if (app.player.direction === "right") {
-            app.hit("barRight");
-            if(app.findBuissonRight(app.player.x, app.player.y) > -1) {
-              app.deleteBuisson(app.findBuissonRight(app.player.x, app.player.y));
-            }
-          } else if (app.player.direction === "up") {
-            app.hit("barTop");
-            if(app.findBuissonTop(app.player.x, app.player.y) > -1) {
-              app.deleteBuisson(app.findBuissonTop(app.player.x, app.player.y));
-            }
-          } else if (app.player.direction === "down") {
-            app.hit("barBottom");
-            if(app.findBuissonBottom(app.player.x, app.player.y) > -1) {
-              app.deleteBuisson(app.findBuissonBottom(app.player.x, app.player.y));
-            }
-          }
+          app.hitAction();
           break;
         default:
           console.log("where?");

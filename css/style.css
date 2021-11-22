@@ -249,19 +249,19 @@ top:40px;
   background-size: 670px;
 }
 
-.buttonMove {
+.move-buttons {
   position: absolute;
   bottom: 5%;
   right: 50%;
   transform: translate(50%, -50%);
 }
 
-.buttonMove button {
+.move-buttons button {
   padding: 15px;
   border-radius: 10px;
 }
 
-.buttonMove div {
+.move-buttons div {
   display: flex;
   justify-content: center;
   margin-bottom: 5px;
