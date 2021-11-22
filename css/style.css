@@ -251,13 +251,13 @@ top:40px;
 
 .move-buttons {
   position: absolute;
-  bottom: 5%;
-  right: 50%;
-  transform: translate(50%, -50%);
+  bottom: 10%;
+  left: 50%;
+  transform: translate(-50%, 50%);
 }
 
 .move-buttons button {
-  padding: 15px;
+  padding: 20px;
   border-radius: 10px;
 }
 
